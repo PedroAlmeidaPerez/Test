@@ -4,11 +4,11 @@ import java.util.Iterator;
 
 public class UserService {
     private ArrayList<User> userList;
+    private UserFile userFile;
 
-    //private Iterator<User> userIterator;
     public UserService() {
-        this.userList = new ArrayList<User>();
-        // this.userIterator = userList.iterator();
+        userFile = new UserFile();
+        this.userList = userFile.readFile();
     }
 
     public void AddUserList (User user){
@@ -24,37 +24,14 @@ public class UserService {
         }
     }
 
-    public void writeFile(){
-        try{
-            ObjectOutputStream writtingFile = new ObjectOutputStream(new FileOutputStream("C:/Test/test.txt"));
-            writtingFile.writeObject(userList);
-            writtingFile.close();
-
-        }catch (Exception e){
-            e.printStackTrace();
-            System.out.println("File not found");
-        }
-    }
-
-    public void readFile (){
-
-        try{
-            ObjectInputStream readingFile = new ObjectInputStream(new FileInputStream("C:/Test/test.txt"));
-            userList = (ArrayList <User>) readingFile.readObject();
-            readingFile.close();
-        }catch (Exception e){
-            e.printStackTrace();
-            System.out.println("File not found");
-        }
-    }
-
-
     public void ShowList(ArrayList<User> list){
 
         Iterator<User> userIterator = list.iterator();
+        System.out.println("------------------------------------");
         while (userIterator.hasNext()){
             System.out.println(userIterator.next().showUser());
         }
+        System.out.println("------------------------------------");
     }
 
 
@@ -64,6 +41,10 @@ public class UserService {
 
     public void setUserList(ArrayList<User> userList) {
         this.userList = userList;
+    }
+
+    public void writeUserList (ArrayList<User> userList) {
+             userFile.writeFile(userList);
     }
 }
 
