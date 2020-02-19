@@ -3,12 +3,15 @@ import java.util.Iterator;
 
 public class UserService {
     private ArrayList<User> userList;
-    private UserFile userFile;
 
     public UserService() {
-        userFile = new UserFile();
-        this.userList = userFile.readFile();
+        this.userList = userList;
     }
+
+    public UserService(ArrayList<User> userList) {
+        this.userList = userList;
+    }
+
 
     public void AddUserList (User user){
         userList.add(user);
@@ -38,12 +41,6 @@ public class UserService {
         return userList;
     }
 
-    public void setUserList(ArrayList<User> userList) {
-        this.userList = userList;
-    }
 
-    public void writeUserList (ArrayList<User> userList) {
-             userFile.writeFile(userList);
-    }
 }
 
